@@ -50,8 +50,8 @@ def autoresponder_webhook():
     user_message = data.get("message", "")
     products = get_products_from_sheets(user_message)
     answer = ask_gpt(user_message, products)
-    # Возвращаем массив ответов (можно один)
-    return jsonify({"replies": [answer]})
+    # Возвращаем массив объектов с ключом "message" для AutoResponder
+    return jsonify({"replies": [{"message": answer}]})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
